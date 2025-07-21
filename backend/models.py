@@ -1,12 +1,14 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base # Import Base from our database file
+# backend/models.py
+from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
 
-class User(Base):
-    __tablename__ = 'users'
+Base = declarative_base()
+
+class Product(Base):
+    __tablename__ = "products"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    name = Column(String, index=True)
+    price = Column(Float)
+    image_url = Column(String) # CHANGED FROM imageUrl
+    description = Column(String)
